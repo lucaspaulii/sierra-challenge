@@ -14,7 +14,7 @@ export default function TasksList({ update }: { update: Function }) {
   };
 
   return (
-    <div>
+    <div className="flex h-fit w-full flex-col gap-5 mt-4">
       {tasks.map((task) => {
         return <TaskItem key={task.id} task={task} handleClick={handleClick} handleEdit={handleEdit}/>;
       })}
