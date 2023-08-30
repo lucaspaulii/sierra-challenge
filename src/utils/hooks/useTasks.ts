@@ -18,6 +18,23 @@ export const useTasks = () => {
     updateTasksAndLocalStorage(newTasks);
   };
 
+  const concludeTask = (id: number) => {
+    let taskIndex;
+    const existingTasks = getUpdatedLocalStorage();
+    const concludedTasks = existingTasks.map((task, index) => {
+        if (task.id == id) {
+            task.status = "completed";
+            taskIndex = index;
+        }
+        return task;
+    });
+    if (taskIndex !== undefined) {
+        const aux = concludedTasks.splice(taskIndex, 1)[0];
+        aux && concludedTasks.push(aux);
+    }
+    updateTasksAndLocalStorage(concludedTasks);
+  }
+
   function generateUniqueId() {
     return Date.now()
   }
@@ -36,7 +53,7 @@ export const useTasks = () => {
     }
   }
 
-  return { tasks, createTask };
+  return { tasks, createTask, concludeTask };
 };
 
 export type Task = {
