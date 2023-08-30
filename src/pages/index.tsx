@@ -1,10 +1,8 @@
 import Head from "next/head";
 import { useEffect } from "react";
-// import { api } from "~/utils/api";
+import TasksContainer from "~/components/tasksContainer";
 
 export default function Home() {
-  // const hello = api.example.hello.useQuery({ text: "from tRPC" });
-
   useEffect(() => {
     document.body.className = "bg-charcoal-700";
   });
@@ -23,10 +21,7 @@ export default function Home() {
           </h1>
         </div>
         <main className="mx-auto max-w-md justify-center pt-32 text-white">
-          ✨ Start here ✨
-          {/* <p className="text-2xl text-white">
-            {hello.data ? hello.data.greeting : "Loading tRPC query..."}
-          </p> */}
+          <TasksContainer />
         </main>
       </div>
     </>
