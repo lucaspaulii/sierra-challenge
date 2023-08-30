@@ -1,28 +1,41 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const useTasks = () => {
-    const [tasks, setTasks] = useState([] as Task[]);
+  const [tasks, setTasks] = useState([] as Task[]);
 
-    const createTask = (taskName: string) => {
-        const newTask: Task = {
-            id: 1,
-            name: taskName,
-            status: "todo"
-        }
-        const newTasks = [newTask, ...tasks];
-        updateTasksAndLocalStorage(newTasks)
+  useEffect(() => {
+    setTasks(getUpdatedLocalStorage());
+  }, []);
+
+  const createTask = (taskName: string) => {
+    const newTask: Task = {
+      id: 1,
+      name: taskName,
+      status: "todo",
+    };
+    const newTasks = [newTask, ...tasks];
+    updateTasksAndLocalStorage(newTasks);
+  };
+
+  function updateTasksAndLocalStorage(updatedTasks: Task[]) {
+    setTasks([...updatedTasks]);
+    localStorage.setItem("tasks", JSON.stringify(updatedTasks));
+  }
+
+  function getUpdatedLocalStorage(): Task[] {
+    const tasksStored = localStorage.getItem("tasks");
+    if (tasksStored) {
+      return JSON.parse(tasksStored);
+    } else {
+      return [];
     }
+  }
 
-    function updateTasksAndLocalStorage(updatedTasks: Task[]) {
-        setTasks([...updatedTasks]);
-        localStorage.setItem("tasks", JSON.stringify(updatedTasks));
-      }
-
-    return { tasks, createTask }
-}
+  return { tasks, createTask };
+};
 
 export type Task = {
-    id: number;
-    name: string;
-    status: "todo" | "completed";
-}
+  id: number;
+  name: string;
+  status: "todo" | "completed";
+};
