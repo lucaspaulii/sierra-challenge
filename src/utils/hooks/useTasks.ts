@@ -9,7 +9,7 @@ export const useTasks = () => {
 
   const createTask = (taskName: string) => {
     const newTask: Task = {
-      id: 1,
+      id: generateUniqueId(),
       name: taskName,
       status: "todo",
     };
@@ -17,6 +17,10 @@ export const useTasks = () => {
     const newTasks = [newTask, ...existingTasks];
     updateTasksAndLocalStorage(newTasks);
   };
+
+  function generateUniqueId() {
+    return Date.now()
+  }
 
   function updateTasksAndLocalStorage(updatedTasks: Task[]) {
     setTasks([...updatedTasks]);
