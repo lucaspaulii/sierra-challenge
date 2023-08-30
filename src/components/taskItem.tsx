@@ -1,7 +1,13 @@
 import { Task } from "~/utils/hooks/useTasks";
 
-export default function TaskItem({task, handleClick} : {task: Task, handleClick: Function}) {
-    return (
-        <div></div>
-    )
-};
+export default function TaskItem({
+  task,
+  handleClick,
+  handleEdit,
+}: {
+  task: Task;
+  handleClick: Function;
+  handleEdit: Function;
+}) {
+  return <div></div>;
+}

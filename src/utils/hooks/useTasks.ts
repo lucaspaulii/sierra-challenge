@@ -22,21 +22,32 @@ export const useTasks = () => {
     let taskIndex;
     const existingTasks = getUpdatedLocalStorage();
     const concludedTasks = existingTasks.map((task, index) => {
-        if (task.id == id) {
-            task.status = "completed";
-            taskIndex = index;
-        }
-        return task;
+      if (task.id == id) {
+        task.status = "completed";
+        taskIndex = index;
+      }
+      return task;
     });
     if (taskIndex !== undefined) {
-        const aux = concludedTasks.splice(taskIndex, 1)[0];
-        aux && concludedTasks.push(aux);
+      const aux = concludedTasks.splice(taskIndex, 1)[0];
+      aux && concludedTasks.push(aux);
     }
     updateTasksAndLocalStorage(concludedTasks);
-  }
+  };
+
+  const editTask = (id: number, taskName: string) => {
+    const existingTasks = getUpdatedLocalStorage();
+    const editedTasks = existingTasks.map((task) => {
+      if (task.id == id) {
+        task.name = taskName;
+      }
+      return task;
+    });
+    updateTasksAndLocalStorage(editedTasks);
+  };
 
   function generateUniqueId() {
-    return Date.now()
+    return Date.now();
   }
 
   function updateTasksAndLocalStorage(updatedTasks: Task[]) {
@@ -53,7 +64,7 @@ export const useTasks = () => {
     }
   }
 
-  return { tasks, createTask, concludeTask };
+  return { tasks, createTask, concludeTask, editTask };
 };
 
 export type Task = {
