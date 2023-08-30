@@ -16,11 +16,27 @@ export default function TaskItem({
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newName = event.target.value;
     setTaskName(newName);
-    //edit task here
-  }
+    handleEdit(task.id, newName);
+  };
 
   return (
     <div key={task.id} className="flex w-full items-center gap-3">
+      <div className="flex items-center justify-center">
+        <input
+          id={task.id.toString()}
+          className="peer hidden"
+          type="radio"
+          defaultChecked={isCompleted}
+          disabled={isCompleted}
+          onClick={() => {
+            handleClick(task.id);
+          }}
+        />
+        <label
+          htmlFor={task.id.toString()}
+          className="box-border h-6 w-6 rounded-full bg-charcoal-600 transition-all duration-100 disabled:bg-charcoal-700  peer-checked:border-4 peer-checked:border-charcoal-600 peer-checked:bg-charcoal-800"
+        ></label>
+      </div>
       {isCompleted ? (
         <p className="text-xl line-through">{task.name}</p>
       ) : (

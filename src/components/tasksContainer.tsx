@@ -10,7 +10,7 @@ export default function TasksContainer() {
   }
 
   return (
-    <div className="w-96">
+    <div className="w-96 font-inter">
       <TasksCreation update={update} />
       <TasksList key={key} update={update} />
     </div>
