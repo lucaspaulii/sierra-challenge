@@ -13,7 +13,8 @@ export const useTasks = () => {
       name: taskName,
       status: "todo",
     };
-    const newTasks = [newTask, ...tasks];
+    const existingTasks = getUpdatedLocalStorage();
+    const newTasks = [newTask, ...existingTasks];
     updateTasksAndLocalStorage(newTasks);
   };
 

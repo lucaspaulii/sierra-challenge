@@ -1,4 +1,4 @@
-export default function taskItem() {
+export default function TaskItem() {
     return (
         <div></div>
     )
