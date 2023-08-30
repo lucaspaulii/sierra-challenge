@@ -1,7 +1,7 @@
 import { useTasks } from "~/utils/hooks/useTasks";
 import TaskItem from "./taskItem";
 
-export default function tasksList() {
+export default function TasksList({ update }: { update: Function }) {
     let { tasks } = useTasks();
 
     return (

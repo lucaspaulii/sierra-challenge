@@ -1,16 +1,24 @@
 import { useState } from "react";
+import { useTasks } from "~/utils/hooks/useTasks";
 
-export default function TasksCreation() {
+export default function TasksCreation({ update }: { update: Function }) {
   const [taskName, setTaskName] = useState("");
+  const { createTask } = useTasks();
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLElement>) => {
     if (taskName.length < 2) {
       return;
     }
     if (event.key == "Enter") {
-      // Handle Task creation via useTasks
+      handleTaskSubmit(taskName);
+      update();
     }
   };
+
+  function handleTaskSubmit(taskName: string) {
+    createTask(taskName);
+    setTaskName("");
+  }
 
   return (
     <input
